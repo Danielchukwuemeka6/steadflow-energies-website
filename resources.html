@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources — SteadFlow Energies</title>
+<meta name="description" content="Educational videos on solar power basics, system sizing, installation, and maintenance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560;9..144,650&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .res-filters{display:flex; gap:.6rem; flex-wrap:wrap; margin-bottom:var(--space-3);}
+  .res-grid{display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-3);}
+  .res-card{
+    flex:0 1 calc(33.333% - var(--space-3) * 2 / 3); min-width:260px;
+    background:var(--white); border:1px solid var(--sand-300); border-radius:var(--radius-m);
+    overflow:hidden; display:flex; flex-direction:column;
+  }
+  @media (max-width:900px){ .res-card{flex:0 1 calc(50% - var(--space-3) / 2);} }
+  @media (max-width:560px){ .res-card{flex:1 1 100%;} }
+  .res-video{aspect-ratio:16/9; width:100%; background:var(--dusk-900); position:relative; cursor:pointer; overflow:hidden;}
+  .res-video img{width:100%; height:100%; object-fit:cover; display:block;}
+  .res-video .play-btn{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  }
+  .res-video .play-btn svg{width:56px; height:56px; filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));}
+  .res-video iframe{width:100%; height:100%; border:0; display:block;}
+  .res-body{padding:var(--space-2); display:flex; flex-direction:column; gap:.4em; flex:1;}
+  .res-cat{font-family:var(--font-mono); font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--canopy-600);}
+  .res-title{font-weight:600; font-size:1rem; line-height:1.35;}
+  .res-summary{font-size:.88rem; color:var(--ink-700);}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" stroke="#1b5e44" stroke-width="1.5"/>
+        <path d="M4 20 L10 20 L12 14 L15 24 L18 10 L21 20 L28 20" stroke="#f4b93e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      SteadFlow Energies
+    </a>
+    <nav class="nav-links" id="nav-links">
+      <a href="about.html">About</a>
+      <a href="solar-solutions.html">Solar Solutions</a>
+      <a href="marketplace.html">Market</a>
+      <a href="installers.html">Installers</a>
+      <a href="our-work.html">Our Work</a>
+      <a href="resources.html" aria-current="page">Resources</a>
+      <a href="blog.html">Blog</a>
+      <a href="steadflow-iq.html">SteadFlow IQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="account.html" class="btn btn-outline-dark btn-sm">My Account</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="nav-toggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero" style="padding-block:var(--space-4);">
+    <div class="wrap">
+      <p class="eyebrow"><span></span>Resources</p>
+      <h1 style="font-size:clamp(2rem,3.6vw,3rem);">Learn before you buy, and after</h1>
+      <p class="lede" style="color:var(--sand-300); margin-top:var(--space-2);">Short videos on solar basics, sizing, installation, and getting the most out of your system.</p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="res-filters reveal">
+        <button class="chip active" data-cat="all">All</button>
+        <button class="chip" data-cat="Basics">Basics</button>
+        <button class="chip" data-cat="Planning">Planning</button>
+        <button class="chip" data-cat="Installation">Installation</button>
+        <button class="chip" data-cat="Maintenance">Maintenance</button>
+      </div>
+      <div class="res-grid reveal" id="res-grid"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:none; margin-top:0;">
+      <span>© <span id="year"></span> SteadFlow Energies. All rights reserved.</span>
+      <span>Lagos, Nigeria</span>
+    </div>
+  </div>
+</footer>
+
+<script src="resources-data.js"></script>
+<script src="script.js"></script>
+<script>
+  (function () {
+    const grid = document.getElementById('res-grid');
+    const filters = document.querySelector('.res-filters');
+
+    function cardHTML(r) {
+      const isPlaceholder = r.videoId === 'YOUR_VIDEO_ID_HERE';
+      return `
+        <div class="res-card">
+          <div class="res-video" data-video-id="${r.videoId}" data-placeholder="${isPlaceholder}">
+            ${isPlaceholder
+              ? `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--sand-300);font-size:.8rem;text-align:center;padding:1em;">Video not linked yet —<br>add a real YouTube ID in resources-data.js</div>`
+              : `<img src="https://img.youtube.com/vi/${r.videoId}/hqdefault.jpg" alt="${r.title}" loading="lazy">
+                 <span class="play-btn"><svg viewBox="0 0 68 48"><path d="M66.5 7.7c-.8-2.9-2.5-5.2-5.4-6C55.8.3 34 .3 34 .3s-21.8 0-27.1 1.4c-2.9.8-4.6 3.1-5.4 6C.1 13 0 24 0 24s.1 11 1.5 16.3c.8 2.9 2.5 5.1 5.4 5.9C12.2 47.7 34 47.7 34 47.7s21.8 0 27.1-1.5c2.9-.8 4.6-3 5.4-5.9C67.9 35 68 24 68 24s-.1-11-1.5-16.3z" fill="#212121" fill-opacity=".8"/><path d="M45 24 27 14v20z" fill="#fff"/></svg></span>`
+            }
+          </div>
+          <div class="res-body">
+            <span class="res-cat">${r.category}</span>
+            <span class="res-title">${r.title}</span>
+            <span class="res-summary">${r.summary}</span>
+          </div>
+        </div>`;
+    }
+
+    function render(cat) {
+      const items = cat === 'all' ? RESOURCES : RESOURCES.filter(r => r.category === cat);
+      grid.innerHTML = items.map(cardHTML).join('');
+
+      grid.querySelectorAll('.res-video').forEach(box => {
+        if (box.dataset.placeholder === 'true') return;
+        box.addEventListener('click', () => {
+          const id = box.dataset.videoId;
+          box.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        }, { once: true });
+      });
+    }
+
+    filters.addEventListener('click', (e) => {
+      const chip = e.target.closest('.chip');
+      if (!chip) return;
+      filters.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      render(chip.dataset.cat);
+    });
+
+    render('all');
+  })();
+</script>
+</body>
+</html>

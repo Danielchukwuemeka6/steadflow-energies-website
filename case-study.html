@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study — SteadFlow Energies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560;9..144,650&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .case-detail{display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4);}
+  @media (max-width:800px){ .case-detail{grid-template-columns:1fr;} }
+  .case-gallery-main{aspect-ratio:4/3; border-radius:var(--radius-m); overflow:hidden; background:var(--sand-200);}
+  .case-gallery-main img{width:100%; height:100%; object-fit:cover;}
+  .case-thumbs{display:flex; gap:.6rem; margin-top:.6rem;}
+  .case-thumb{width:80px; height:60px; border-radius:var(--radius-s); overflow:hidden; padding:0; border:2px solid var(--sand-300); background:none; cursor:pointer; flex:none;}
+  .case-thumb img{width:100%; height:100%; object-fit:cover; display:block;}
+  .case-thumb.active{border-color:var(--canopy-600);}
+  .system-list{margin:.6em 0 0; padding-left:0; list-style:none; display:grid; gap:.5em;}
+  .system-list li{display:flex; gap:.6em; font-size:.92rem;}
+  .system-list li::before{content:"⚡"; flex:none;}
+  .testimonial-block{background:var(--canopy-100); border-radius:var(--radius-m); padding:var(--space-3); margin-top:var(--space-3);}
+  .testimonial-quote{font-family:var(--font-display); font-size:1.2rem; color:var(--ink-900); margin-bottom:.6em;}
+  .testimonial-who{font-size:.85rem; color:var(--ink-500);}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" stroke="#1b5e44" stroke-width="1.5"/>
+        <path d="M4 20 L10 20 L12 14 L15 24 L18 10 L21 20 L28 20" stroke="#f4b93e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      SteadFlow Energies
+    </a>
+    <nav class="nav-links" id="nav-links">
+      <a href="about.html">About</a>
+      <a href="solar-solutions.html">Solar Solutions</a>
+      <a href="marketplace.html">Market</a>
+      <a href="installers.html">Installers</a>
+      <a href="our-work.html" aria-current="page">Our Work</a>
+      <a href="resources.html">Resources</a>
+      <a href="blog.html">Blog</a>
+      <a href="steadflow-iq.html">SteadFlow IQ</a>
+      <a href="impact.html">Impact</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="account.html" class="btn btn-outline-dark btn-sm">My Account</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="nav-toggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section-tight" id="case-root"><!-- rendered by script below --></section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:none; margin-top:0;">
+      <span>© <span id="year"></span> SteadFlow Energies. All rights reserved.</span>
+      <span>Lagos, Nigeria</span>
+    </div>
+  </div>
+</footer>
+
+<script src="case-studies-data.js"></script>
+<script src="script.js"></script>
+<script>
+  (function () {
+    const id = new URLSearchParams(location.search).get('id');
+    const study = getCaseStudyById(id);
+    const root = document.getElementById('case-root');
+
+    if (!study) {
+      root.innerHTML = `<div class="wrap"><p class="empty-state">Case study not found. <a href="our-work.html">Back to Our Work</a></p></div>`;
+      return;
+    }
+
+    root.innerHTML = `
+      <div class="wrap">
+        <a href="our-work.html" class="small">← Back to Our Work</a>
+        <div class="case-detail reveal" style="margin-top:var(--space-2);">
+          <div>
+            <div class="case-gallery-main">
+              ${caseImgTag(study.images[0], study.title, 'id="case-main-img"')}
+            </div>
+            <div class="case-thumbs">
+              ${study.images.map((base, i) => `
+                <button type="button" class="case-thumb ${i === 0 ? 'active' : ''}" data-base="${base.replace(/"/g, '&quot;')}">
+                  ${caseImgTag(base, `${study.title} view ${i + 1}`)}
+                </button>`).join('')}
+            </div>
+          </div>
+          <div>
+            <span class="badge-soft">${study.customerType}</span>
+            <h1 style="font-size:1.9rem; margin-top:.4em;">${study.title}</h1>
+            <p class="small">📍 ${study.location} · ${formatCaseDate(study.date)}</p>
+
+            <p class="eyebrow" style="margin-top:var(--space-3);">System Installed</p>
+            <ul class="system-list">
+              ${study.systemInstalled.map(s => `<li>${s}</li>`).join('')}
+            </ul>
+
+            <p class="eyebrow" style="margin-top:var(--space-3);">The Story</p>
+            <p>${study.story}</p>
+
+            <div class="testimonial-block">
+              <p class="testimonial-quote">"${study.testimonial.quote}"</p>
+              <p class="testimonial-who"><strong>${study.testimonial.name}</strong> — ${study.testimonial.role}</p>
+            </div>
+
+            <a href="solar-solutions.html#assessment" class="btn btn-primary" style="margin-top:var(--space-3);">Get a Similar System</a>
+          </div>
+        </div>
+      </div>`;
+
+    document.querySelectorAll('.case-thumb').forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        const mainImg = document.getElementById('case-main-img');
+        mainImg.dataset.base = thumb.dataset.base;
+        mainImg.dataset.extIdx = '0';
+        mainImg.onerror = () => caseImgFallback(mainImg);
+        mainImg.src = caseImgSrc(thumb.dataset.base, 0);
+        document.querySelectorAll('.case-thumb').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+      });
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Work — SteadFlow Energies</title>
+<meta name="description" content="Real installations SteadFlow has completed — photos, systems installed, and customer feedback.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560;9..144,650&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .work-grid{display:flex; flex-wrap:wrap; justify-content:center; gap:var(--space-3); margin-top:var(--space-3);}
+  .work-card{
+    flex:0 1 calc(33.333% - var(--space-3) * 2 / 3); min-width:260px;
+    background:var(--white); border:1px solid var(--sand-300); border-radius:var(--radius-m);
+    overflow:hidden; display:flex; flex-direction:column;
+    transition:transform .25s var(--ease), box-shadow .25s ease;
+  }
+  .work-card:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(16,36,28,.08);}
+  @media (max-width:900px){ .work-card{flex:0 1 calc(50% - var(--space-3) / 2);} }
+  @media (max-width:560px){ .work-card{flex:1 1 100%;} }
+  .work-thumb{aspect-ratio:4/3; width:100%; object-fit:cover; background:var(--sand-200);}
+  .work-body{padding:var(--space-2); display:flex; flex-direction:column; gap:.4em; flex:1;}
+  .work-type{font-family:var(--font-mono); font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--canopy-600);}
+  .work-title{font-weight:600; font-size:1.02rem;}
+  .work-loc{font-size:.85rem; color:var(--ink-500);}
+  .work-summary{font-size:.88rem; color:var(--ink-700); margin-top:.2em;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" stroke="#1b5e44" stroke-width="1.5"/>
+        <path d="M4 20 L10 20 L12 14 L15 24 L18 10 L21 20 L28 20" stroke="#f4b93e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      SteadFlow Energies
+    </a>
+    <nav class="nav-links" id="nav-links">
+      <a href="about.html">About</a>
+      <a href="solar-solutions.html">Solar Solutions</a>
+      <a href="marketplace.html">Market</a>
+      <a href="installers.html">Installers</a>
+      <a href="our-work.html" aria-current="page">Our Work</a>
+      <a href="resources.html">Resources</a>
+      <a href="blog.html">Blog</a>
+      <a href="steadflow-iq.html">SteadFlow IQ</a>
+      <a href="impact.html">Impact</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="account.html" class="btn btn-outline-dark btn-sm">My Account</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="nav-toggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero" style="padding-block:var(--space-4);">
+    <div class="wrap">
+      <p class="eyebrow"><span></span>Our Work</p>
+      <h1 style="font-size:clamp(2rem,3.6vw,3rem);">Real installations, real businesses</h1>
+      <p class="lede" style="color:var(--sand-300); margin-top:var(--space-2);">A look at completed SteadFlow installations — what was installed, where, and what the customer had to say afterward.</p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="work-grid" id="work-grid"><!-- rendered below --></div>
+      <p class="empty-state" id="work-empty" hidden>No case studies yet — check back soon.</p>
+    </div>
+  </section>
+
+  <section class="section-sand">
+    <div class="wrap">
+      <div class="cta-band reveal" style="background:var(--dusk-900);">
+        <div>
+          <h2>Want to be featured here next?</h2>
+          <p style="color:var(--sand-300); margin-top:.5em;">Book a free solar assessment and let's get your business running steadier.</p>
+        </div>
+        <a href="solar-solutions.html#assessment" class="btn btn-primary">Get Solar Assessment</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:none; margin-top:0;">
+      <span>© <span id="year"></span> SteadFlow Energies. All rights reserved.</span>
+      <span>Lagos, Nigeria</span>
+    </div>
+  </div>
+</footer>
+
+<script src="case-studies-data.js"></script>
+<script src="script.js"></script>
+<script>
+  (function () {
+    const grid = document.getElementById('work-grid');
+    const empty = document.getElementById('work-empty');
+
+    if (!CASE_STUDIES.length) {
+      empty.hidden = false;
+    } else {
+      grid.innerHTML = CASE_STUDIES.map(c => `
+        <a href="case-study.html?id=${c.id}" class="work-card">
+          ${caseImgTag(c.images[0], c.title, 'class="work-thumb" loading="lazy"')}
+          <div class="work-body">
+            <span class="work-type">${c.customerType}</span>
+            <span class="work-title">${c.title}</span>
+            <span class="work-loc">📍 ${c.location}</span>
+            <span class="work-summary">${c.summary}</span>
+          </div>
+        </a>`).join('');
+    }
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find a Certified Installer — SteadFlow Energies</title>
+<meta name="description" content="Connect with verified renewable energy professionals through SteadFlow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560;9..144,650&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .installer-toolbar{display:flex; gap:.8rem; flex-wrap:wrap; margin-bottom:var(--space-2);}
+  .installer-toolbar input, .installer-toolbar select{width:auto; min-width:180px;}
+  .installer-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-3); margin-top:var(--space-3);}
+  @media (max-width:900px){.installer-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:640px){.installer-grid{grid-template-columns:1fr;}}
+
+  .inst-card{background:var(--white); border:1px solid var(--sand-300); border-radius:var(--radius-m); padding:var(--space-3); display:flex; flex-direction:column;}
+  .inst-avatar{width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg, var(--canopy-600), var(--dusk-700)); color:var(--white); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:600; font-size:1.2rem; margin-bottom:var(--space-2);}
+  .inst-name{font-weight:600; font-size:1.05rem;}
+  .inst-title{color:var(--ink-500); font-size:.85rem; margin-bottom:.5em;}
+  .inst-meta{font-size:.82rem; color:var(--ink-500); margin-bottom:.6em;}
+  .inst-tags{display:flex; flex-wrap:wrap; gap:.4em; margin-bottom:.8em;}
+  .inst-tag{background:var(--canopy-100); color:var(--canopy-700); font-size:.72rem; padding:.25em .6em; border-radius:999px;}
+  .inst-status{font-size:.82rem; margin-bottom:var(--space-2); display:flex; align-items:center; gap:.4em;}
+  .inst-card .btn{margin-top:auto;}
+
+  .match-panel{background:var(--canopy-900); color:var(--sand-100); border-radius:var(--radius-l); padding:var(--space-4); margin-bottom:var(--space-4);}
+  .match-panel h2{color:var(--white); font-size:1.5rem;}
+  .match-result{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15); border-radius:var(--radius-m); padding:var(--space-2); margin-top:var(--space-2);}
+  .match-score{font-family:var(--font-mono); color:var(--amber-500); font-weight:600;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" stroke="#1b5e44" stroke-width="1.5"/>
+        <path d="M4 20 L10 20 L12 14 L15 24 L18 10 L21 20 L28 20" stroke="#f4b93e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      SteadFlow Energies
+    </a>
+    <nav class="nav-links" id="nav-links">
+      <a href="about.html">About</a>
+      <a href="solar-solutions.html">Solar Solutions</a>
+      <a href="marketplace.html">Market</a>
+      <a href="installers.html" aria-current="page">Installers</a>
+      <a href="our-work.html">Our Work</a>
+      <a href="resources.html">Resources</a>
+      <a href="blog.html">Blog</a>
+      <a href="steadflow-iq.html">SteadFlow IQ</a>
+      <a href="impact.html">Impact</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="account.html" class="btn btn-outline-dark btn-sm">My Account</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="nav-toggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero" style="padding-block:var(--space-4);">
+    <div class="wrap">
+      <p class="eyebrow"><span></span>Find a Certified Installer</p>
+      <h1 style="font-size:clamp(2rem,3.6vw,3rem);">Connect with verified renewable energy professionals</h1>
+      <p class="lede" style="color:var(--sand-300); margin-top:var(--space-2);">Every installer here is reviewed by SteadFlow before being listed — browse profiles yourself, or let us match you to the right one.</p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap">
+
+      <!-- AI MATCH PANEL -->
+      <div class="match-panel reveal">
+        <p class="eyebrow" style="color:var(--amber-500)"><span></span>Let SteadFlow find the right installer</p>
+        <h2>Not sure who to choose?</h2>
+        <p style="color:var(--sand-300); max-width:60ch;">Tell us about your business and we'll recommend the best-matched installer from our network.</p>
+        <form id="match-form" class="grid grid-3" style="margin-top:var(--space-3); gap:var(--space-2);">
+          <div>
+            <label style="color:var(--sand-100)" for="match-location">Location</label>
+            <input id="match-location" placeholder="e.g. Lagos" required>
+          </div>
+          <div>
+            <label style="color:var(--sand-100)" for="match-type">Business type</label>
+            <input id="match-type" placeholder="e.g. Frozen foods shop" required>
+          </div>
+          <div>
+            <label style="color:var(--sand-100)" for="match-power">Estimated power need</label>
+            <select id="match-power">
+              <option>I don't know</option>
+              <option>1–3kW</option>
+              <option>3–5kW</option>
+              <option>5–10kW</option>
+              <option>10kW+</option>
+            </select>
+          </div>
+        </form>
+        <button class="btn btn-primary" id="match-btn" style="margin-top:var(--space-2);">Find My Match</button>
+        <div id="match-output"></div>
+      </div>
+
+      <!-- DIRECTORY -->
+      <div class="section-head reveal">
+        <p class="eyebrow">Or browse installers yourself</p>
+        <h2>Find the right installer</h2>
+      </div>
+      <div class="installer-toolbar reveal">
+        <input type="search" id="inst-search" placeholder="Search by name or location...">
+        <select id="inst-spec">
+          <option value="all">All specializations</option>
+          <option value="Residential Solar">Residential Solar</option>
+          <option value="SME Systems">SME Systems</option>
+          <option value="Lithium Battery Systems">Lithium Battery Systems</option>
+          <option value="Solar Pumps">Solar Pumps</option>
+          <option value="Enterprise Systems">Enterprise Systems</option>
+          <option value="Energy Auditing">Energy Auditing</option>
+        </select>
+        <select id="inst-exp">
+          <option value="0">Any experience</option>
+          <option value="3">3+ years</option>
+          <option value="5">5+ years</option>
+          <option value="8">8+ years</option>
+        </select>
+      </div>
+      <div class="installer-grid reveal" id="installer-grid"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:none; margin-top:0;">
+      <span>© <span id="year"></span> SteadFlow Energies. All rights reserved.</span>
+      <span>Lagos, Nigeria</span>
+    </div>
+  </div>
+</footer>
+
+<script src="installers-data.js"></script>
+<script src="script.js"></script>
+<script>
+  (function () {
+    const grid = document.getElementById('installer-grid');
+    const search = document.getElementById('inst-search');
+    const specSelect = document.getElementById('inst-spec');
+    const expSelect = document.getElementById('inst-exp');
+
+    function initials(name) {
+      return name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+    }
+
+    function cardHTML(inst) {
+      const v = verificationLabel(inst.verification);
+      return `
+        <div class="inst-card">
+          <div class="inst-avatar">${initials(inst.name)}</div>
+          <div class="inst-name">${inst.name}</div>
+          <div class="inst-title">${inst.title}</div>
+          <div class="inst-meta">📍 ${inst.location} · ${inst.experienceYears}+ years</div>
+          <div class="inst-tags">${inst.specializations.map(s => `<span class="inst-tag">${s}</span>`).join('')}</div>
+          <div class="inst-status">${v.emoji} ${v.text}</div>
+          <a href="installer-profile.html?id=${inst.id}" class="btn btn-outline-dark btn-sm">View Profile</a>
+        </div>`;
+    }
+
+    // Registered BEFORE the first render, so this fix applies no matter what
+    // happens below — if render() ever throws, this listener still exists.
+    window.addEventListener('pageshow', function (event) {
+      if (event.persisted) {
+        render();
+      }
+    });
+
+    function render() {
+      try {
+        const q = search.value.trim().toLowerCase();
+        const spec = specSelect.value;
+        const minExp = parseInt(expSelect.value, 10);
+
+        const items = INSTALLERS.filter(i => {
+          const matchesQuery = !q || i.name.toLowerCase().includes(q) || i.location.toLowerCase().includes(q);
+          const matchesSpec = spec === 'all' || i.specializations.includes(spec);
+          const matchesExp = i.experienceYears >= minExp;
+          return matchesQuery && matchesSpec && matchesExp;
+        });
+
+        grid.innerHTML = items.length
+          ? items.map(cardHTML).join('')
+          : `<p class="empty-state">No installers match your filters yet.</p>`;
+      } catch (err) {
+        console.error('Installer render failed:', err);
+        grid.innerHTML = `<p class="empty-state" style="color:var(--alert-500);">Something went wrong loading installers: ${err.message}</p>`;
+      }
+    }
+
+    [search, specSelect, expSelect].forEach(el => el.addEventListener('input', render));
+    render();
+
+    // ---- AI matching ----
+    document.getElementById('match-btn').addEventListener('click', async (e) => {
+      e.preventDefault();
+      const output = document.getElementById('match-output');
+      const location = document.getElementById('match-location').value;
+      const businessType = document.getElementById('match-type').value;
+      const powerNeed = document.getElementById('match-power').value;
+
+      if (!location || !businessType) {
+        output.innerHTML = `<p class="small" style="color:var(--amber-500); margin-top:var(--space-2);">Please fill in location and business type.</p>`;
+        return;
+      }
+
+      output.innerHTML = `<p class="small" style="color:var(--sand-300); margin-top:var(--space-2);">Finding your best match...</p>`;
+
+      try {
+        const res = await fetch('/api/match-installer', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ location, businessType, powerNeed, installers: INSTALLERS }),
+        });
+
+        if (!res.ok) throw new Error('not connected');
+        const data = await res.json();
+
+        output.innerHTML = `
+          <div class="match-result">
+            <div class="match-score">${data.matchPercent}% match</div>
+            <strong style="font-size:1.1rem;">${data.installerName}</strong>
+            <p style="color:var(--sand-300); margin-top:.4em;">${data.reason}</p>
+            <a href="installer-profile.html?id=${data.installerId}" class="btn btn-primary btn-sm" style="margin-top:.6em;">View ${data.installerName.split(' ')[0]}'s Profile</a>
+          </div>`;
+      } catch (err) {
+        output.innerHTML = `
+          <div class="match-result">
+            <p class="small" style="color:var(--sand-300);">
+              <strong style="color:var(--amber-500);">AI matching isn't connected yet</strong> — this needs the Gemini API key set up as a Cloudflare Pages Function secret (see functions/api/match-installer.js). Meanwhile, browse installers below.
+            </p>
+          </div>`;
+      }
+    });
+  })();
+</script>
+</body>
+</html>

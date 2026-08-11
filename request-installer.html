@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request an Installer — SteadFlow Energies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560;9..144,650&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" stroke="#1b5e44" stroke-width="1.5"/>
+        <path d="M4 20 L10 20 L12 14 L15 24 L18 10 L21 20 L28 20" stroke="#f4b93e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      SteadFlow Energies
+    </a>
+    <nav class="nav-links" id="nav-links">
+      <a href="about.html">About</a>
+      <a href="solar-solutions.html">Solar Solutions</a>
+      <a href="marketplace.html">Market</a>
+      <a href="installers.html">Installers</a>
+      <a href="our-work.html">Our Work</a>
+      <a href="resources.html">Resources</a>
+      <a href="blog.html">Blog</a>
+      <a href="steadflow-iq.html">SteadFlow IQ</a>
+      <a href="impact.html">Impact</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="account.html" class="btn btn-outline-dark btn-sm">My Account</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="nav-toggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero" style="padding-block:var(--space-4);">
+    <div class="wrap">
+      <p class="eyebrow"><span></span>Request an installer</p>
+      <h1 id="request-heading" style="font-size:clamp(1.8rem,3.2vw,2.6rem);">Interested in working with this installer?</h1>
+      <p class="lede" style="color:var(--sand-300); margin-top:var(--space-2);">Submit your request and SteadFlow will coordinate the next step — we contact the installer, schedule a consultation, and stay involved through installation.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap grid grid-2">
+      <div>
+        <p class="eyebrow">Your requested installer</p>
+        <div class="card" id="installer-summary"><!-- filled by script --></div>
+        <div class="divider"></div>
+        <p class="small"><strong>What happens next:</strong> SteadFlow reviews your request, contacts the installer, and schedules a consultation with you both. You won't need to coordinate directly with the installer yourself.</p>
+      </div>
+
+      <form class="card form-grid" id="request-form" data-demo-form>
+        <p class="eyebrow" style="margin:0;">Your information</p>
+        <div class="field-row">
+          <div>
+            <label for="r-name">Full name</label>
+            <input id="r-name" required>
+          </div>
+          <div>
+            <label for="r-business">Business name</label>
+            <input id="r-business" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div>
+            <label for="r-phone">Phone</label>
+            <input id="r-phone" type="tel" required>
+          </div>
+          <div>
+            <label for="r-email">Email</label>
+            <input id="r-email" type="email" required>
+          </div>
+        </div>
+        <div>
+          <label for="r-location">Location</label>
+          <input id="r-location" required>
+        </div>
+
+        <p class="eyebrow" style="margin:var(--space-2) 0 0;">Project information</p>
+        <div>
+          <label for="r-project-type">What do you need?</label>
+          <select id="r-project-type">
+            <option>New solar installation</option>
+            <option>Existing system upgrade</option>
+            <option>Maintenance</option>
+            <option>Energy assessment</option>
+            <option>Battery replacement</option>
+            <option>Inverter replacement</option>
+          </select>
+        </div>
+        <div>
+          <label for="r-power">Estimated power requirement</label>
+          <select id="r-power">
+            <option>I don't know</option>
+            <option>1–3kW</option>
+            <option>3–5kW</option>
+            <option>5–10kW</option>
+            <option>10kW+</option>
+          </select>
+        </div>
+        <div>
+          <label for="r-notes">Additional information</label>
+          <textarea id="r-notes" rows="3" placeholder="Tell us about your energy needs..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Request</button>
+        <p class="form-note small"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:none; margin-top:0;">
+      <span>© <span id="year"></span> SteadFlow Energies. All rights reserved.</span>
+      <span>Lagos, Nigeria</span>
+    </div>
+  </div>
+</footer>
+
+<script src="installers-data.js"></script>
+<script src="script.js"></script>
+<script>
+  (function () {
+    const id = new URLSearchParams(location.search).get('id');
+    const inst = getInstallerById(id);
+    const summary = document.getElementById('installer-summary');
+
+    if (inst) {
+      document.getElementById('request-heading').textContent = `Interested in working with ${inst.name.split(' ')[0]}?`;
+      const v = verificationLabel(inst.verification);
+      summary.innerHTML = `
+        <strong>${inst.name}</strong>
+        <p class="small">${inst.title}</p>
+        <p class="small">📍 ${inst.location} · ${v.emoji} ${v.text}</p>`;
+    } else {
+      summary.innerHTML = `<p class="small">No specific installer selected — SteadFlow will assign the best match from our network.</p>`;
+    }
+
+    // This is the "installer name automatically attached" piece from the spec:
+    // the request record includes the installer ID from the URL, so the customer
+    // never has to type it in themselves.
+    document.getElementById('request-form').addEventListener('submit', () => {
+      const requestRecord = {
+        customerName: document.getElementById('r-name').value,
+        business: document.getElementById('r-business').value,
+        location: document.getElementById('r-location').value,
+        requestedInstaller: inst ? inst.name : 'SteadFlow to assign',
+        installerId: inst ? inst.id : null,
+        requestType: document.getElementById('r-project-type').value,
+        submitted: new Date().toISOString(),
+      };
+      // Demo only — once the requests table exists in Supabase, this is where
+      // we'd insert requestRecord instead of just logging it.
+      console.log('Installer request (demo):', requestRecord);
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — SteadFlow Energies</title>
+<meta name="description" content="Company news, updates, and articles from SteadFlow Energies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,560;9..144,650&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .post-list{display:grid; gap:0; max-width:74ch;}
+  .post-row{padding-block:var(--space-3); border-top:1px solid var(--sand-300);}
+  .post-row:last-child{border-bottom:1px solid var(--sand-300);}
+  .post-date{font-family:var(--font-mono); font-size:.78rem; color:var(--ink-500); margin-bottom:.4em;}
+  .post-title{font-size:1.3rem; margin-bottom:.4em;}
+  .post-title a{color:var(--ink-900);}
+  .post-title a:hover{color:var(--canopy-700);}
+  .post-excerpt{color:var(--ink-700);}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" stroke="#1b5e44" stroke-width="1.5"/>
+        <path d="M4 20 L10 20 L12 14 L15 24 L18 10 L21 20 L28 20" stroke="#f4b93e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      SteadFlow Energies
+    </a>
+    <nav class="nav-links" id="nav-links">
+      <a href="about.html">About</a>
+      <a href="solar-solutions.html">Solar Solutions</a>
+      <a href="marketplace.html">Market</a>
+      <a href="installers.html">Installers</a>
+      <a href="our-work.html">Our Work</a>
+      <a href="resources.html">Resources</a>
+      <a href="blog.html" aria-current="page">Blog</a>
+      <a href="steadflow-iq.html">SteadFlow IQ</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="account.html" class="btn btn-outline-dark btn-sm">My Account</a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="nav-toggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero" style="padding-block:var(--space-4);">
+    <div class="wrap">
+      <p class="eyebrow"><span></span>Blog</p>
+      <h1 style="font-size:clamp(2rem,3.6vw,3rem);">News and updates from SteadFlow</h1>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="post-list" id="post-list"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="border-top:none; margin-top:0;">
+      <span>© <span id="year"></span> SteadFlow Energies. All rights reserved.</span>
+      <span>Lagos, Nigeria</span>
+    </div>
+  </div>
+</footer>
+
+<script src="blog-data.js"></script>
+<script src="script.js"></script>
+<script>
+  document.getElementById('post-list').innerHTML = BLOG_POSTS
+    .slice()
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .map(p => `
+      <article class="post-row">
+        <div class="post-date">${formatBlogDate(p.date)} · ${p.author}</div>
+        <h2 class="post-title"><a href="blog-post.html?id=${p.id}">${p.title}</a></h2>
+        <p class="post-excerpt">${p.excerpt}</p>
+      </article>`).join('');
+</script>
+</body>
+</html>
