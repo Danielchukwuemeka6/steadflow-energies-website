@@ -41,8 +41,8 @@ const CASE_STUDIES = [
   },
   {
     id: "ikotun-Cold Room",
-    title: "3kW Salon Installation",
-    customerType: "7.2kW Lithium Battery Solar Installation",
+    title: "7.2kW Lithium Battery Solar Installation",
+    customerType: "Cold Room",
     location: "Ikotun Market, Lagos",
     date: "2026-04",
     images: ["Islamic street", "Islamic street02", "Islamic street03"],
