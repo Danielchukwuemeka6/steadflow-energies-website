@@ -33,7 +33,7 @@ const CASE_STUDIES = [
     customerType: "Tailoring materials shop",
     location: "Ikotun Market, Lagos",
     date: "2026-03",
-    images: ["Ikotun market", "Ikotun market02", "Ikotun market03"],
+    images: ["Ikotun market02", "Ikotun market02", "Ikotun market"],
     summary: "A tailoring materials shop reduced its dependence on petrol-generated power and now uses its solar system to support its main shop and two additional shops.",
     systemInstalled: ["550W Monocrystalline Solar Panel", "10kVA Pure Sine Wave Inverter (48V)", "G12V200AH Gel Battery – 12V 200Ah Deep Cycle"],
     story: "This Ikotun Market retailer was spending a significant share of daily revenue on diesel to keep freezers running through outages. SteadFlow assessed the shop's load — primarily refrigeration, lighting, and POS — and sized a 5.5kW system with 10kWh of lithium storage to cover a full day and night cycle. Installation was completed in two days with no disruption to trading hours.",
