@@ -28,28 +28,28 @@ function caseImgTag(basePath, altText, extraAttrs) {
 // images: array of 3 base filenames (no extension) in case-studies-pictures/
 const CASE_STUDIES = [
   {
-    id: "ikotun-frozen-foods",
-    title: "5kW SME Solar Installation",
-    customerType: "Frozen foods retailer",
+    id: "Tailoring materials shop",
+    title: "450W Monocrystalline Solar Panel with 12V 200Ah Deep Cycle Gel Battery",
+    customerType: "Tailoring materials shop",
     location: "Ikotun Market, Lagos",
     date: "2026-03",
-    images: ["Islamic street", "Islamic street02", "Islamic street03"],
-    summary: "A frozen foods shop moved off diesel entirely, keeping freezers running through daily outages.",
-    systemInstalled: ["5.5kW solar PV array", "5kW pure sine wave inverter", "10kWh lithium battery bank", "Smart monitoring via SteadFlow IQ"],
+    images: ["Ikotun market", "Ikotun market02", "Ikotun market03"],
+    summary: "A tailoring materials shop reduced its dependence on petrol-generated power and now uses its solar system to support its main shop and two additional shops.",
+    systemInstalled: ["550W Monocrystalline Solar Panel", "10kVA Pure Sine Wave Inverter (48V)", "G12V200AH Gel Battery – 12V 200Ah Deep Cycle"],
     story: "This Ikotun Market retailer was spending a significant share of daily revenue on diesel to keep freezers running through outages. SteadFlow assessed the shop's load — primarily refrigeration, lighting, and POS — and sized a 5.5kW system with 10kWh of lithium storage to cover a full day and night cycle. Installation was completed in two days with no disruption to trading hours.",
-    testimonial: { quote: "We used to close the shop whenever fuel prices spiked. Now the freezers run all day and I've stopped budgeting for petrol.", name: "Amaka O.", role: "Shop owner" }
+    testimonial: { quote: "We were spending over ₦4.4 million every year on petrol for the generator. Since installing solar, we no longer have to carry that same fuel burden, and we can now use the power to support our two other shops.", name: "Ifeanyi Ezeani.", role: "CEO, Ifeze enterprises" }
   },
   {
-    id: "ikotun-salon",
+    id: "ikotun-Cold Room",
     title: "3kW Salon Installation",
-    customerType: "Hair & beauty salon",
+    customerType: "7.2kW Lithium Battery Solar Installation",
     location: "Ikotun Market, Lagos",
     date: "2026-04",
-    images: ["Ikotun market", "Ikotun market02", "Ikotun market03"],
-    summary: "A salon shifted dryer and styling equipment usage to daytime solar hours, cutting evening grid load in half.",
-    systemInstalled: ["3kW solar PV array", "3kVA inverter", "5kWh lithium battery"],
-    story: "Salons carry a spikier load profile than most SMEs — dryers and styling tools draw heavily but intermittently. SteadFlow IQ's usage dashboard helped this customer identify that shifting dryer use to daytime hours, when solar generation peaks, meaningfully reduced evening grid and generator dependence.",
-    testimonial: { quote: "The dashboard tells me exactly what my salon is using. I moved my dryers to daytime hours and cut my evening load in half.", name: "Tunde A.", role: "Salon owner" }
+    images: ["Islamic street", "Islamic street02", "Islamic street03"],
+    summary: "A cold room adopted solar power to support refrigeration and reduce dependence on petrol-generated electricity during frequent power outages.",
+    systemInstalled: ["4 X 550W Monocrystalline Solar Panels", "10kVA Pure Sine Wave Inverter (48V)", "7.2KW Wall-Mount Lithium Battery"],
+    story: "This cold room in Ikotun Market depends on continuous electricity to preserve frozen and temperature-sensitive products. Frequent power outages meant relying heavily on petrol-generated electricity, increasing operating costs and creating the risk of disruption to refrigeration. SteadyFlow coordinated the procurement of a solar power system designed to support the cold room's refrigeration load and provide a more reliable source of electricity. The installation has helped the business reduce its dependence on petrol generation and maintain more consistent power for its refrigeration operations.",
+    testimonial: { quote: "Reliable electricity is very important for our cold room. Since installing the solar system, we have been able to keep our refrigeration running with much less dependence on the generator.", name: "Tunde A.", role: "CEO Ikotun Cold room" }
   }
 ];
 
